@@ -1,6 +1,6 @@
 use anyhow::{ensure, Context, Result};
 use clap::Args;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 use crate::{
   linkmanager::{self, Symlink},
@@ -37,7 +37,7 @@ pub struct AddOptions {
   pub name: Option<String>,
 }
 
-pub fn links_add(opts: AddOptions) -> Result<()> {
+pub fn _links_add(opts: AddOptions) -> Result<()> {
   let path = opts.path;
   ensure!(path.exists(), format!("{} doesn't exist", path.display()));
 

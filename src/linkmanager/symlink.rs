@@ -85,15 +85,14 @@ impl Symlink {
   }
 
   /// Removes the symlink.
-  pub fn unlink(&self) -> Result<()> {
+  pub fn _unlink(&self) -> Result<()> {
     todo!()
   }
 }
 
 impl fmt::Display for Symlink {
   fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-    write!(f, "{} 🠆 {}",
- display_path(&self.source), display_path(&self.target))
+    write!(f, "{} 🠆 {}", display_path(&self.source), display_path(&self.target))
   }
 }
 

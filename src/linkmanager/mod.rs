@@ -7,7 +7,7 @@ pub use symlink::*;
 use crate::utils::{expand_home_dir, get_subdirs, is_dotfile};
 
 pub struct Linkmanager {
-  default_target_path: PathBuf,
+  _default_target_path: PathBuf,
   dotfile_dir: PathBuf,
   links: Vec<Symlink>,
 }
@@ -39,7 +39,7 @@ impl Linkmanager {
       }
     }
     Ok(Self {
-      default_target_path,
+      _default_target_path: default_target_path,
       dotfile_dir,
       links,
     })
