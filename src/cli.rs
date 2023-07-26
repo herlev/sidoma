@@ -35,7 +35,9 @@ enum Templates {
   /// Render a single template file
   Render {
     #[arg(short, long)]
+    /// Toml file for specifying the template context
     context: Option<PathBuf>,
+    /// Template file to be rendered
     file: PathBuf,
   },
 }
