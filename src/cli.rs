@@ -40,6 +40,12 @@ enum Templates {
     /// Template file to be rendered
     file: PathBuf,
   },
+  /// Render all .j2 files found in the dotfile directory
+  RenderAll {
+    #[arg(short, long)]
+    /// Toml file for specifying the template context
+    context: Option<PathBuf>,
+  },
 }
 
 #[derive(Subcommand)]
@@ -66,6 +72,7 @@ pub fn run() -> Result<()> {
     },
     Commands::Templates { command } => match command {
       Templates::Render { context, file } => templater::render_single_template(file, context)?,
+      Templates::RenderAll { context } => templater::render_all(context)?,
     },
     Commands::Init { dotfile_dir } => init(dotfile_dir)?,
   }
