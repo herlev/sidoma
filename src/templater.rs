@@ -22,6 +22,7 @@ pub fn render_single_template(template_file: PathBuf, context_file: Option<PathB
 
 fn render_template(name: &str, content: &str, context: Table) -> Result<String, minijinja::Error> {
   let mut environment = Environment::new();
+  environment.set_debug(true);
   environment.add_template(name, &content)?;
   environment.set_undefined_behavior(minijinja::UndefinedBehavior::Strict);
   let s = environment.get_template(name).unwrap().render(context)?;
