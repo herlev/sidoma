@@ -3,6 +3,7 @@
 mod app;
 mod cli;
 mod linkmanager;
+mod templater;
 mod utils;
 
 use anyhow::Result;

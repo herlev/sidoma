@@ -1,6 +1,9 @@
 use std::path::PathBuf;
 
-use crate::app::{init, links_create, links_status, AddOptions};
+use crate::{
+  app::{init, links_create, links_status, AddOptions},
+  templater,
+};
 use anyhow::Result;
 use clap::{Parser, Subcommand};
 
@@ -18,8 +21,23 @@ enum Commands {
     #[command(subcommand)]
     command: Links,
   },
+  /// Manage template files
+  Templates {
+    #[command(subcommand)]
+    command: Templates,
+  },
   /// Initialize sidoma
   Init { dotfile_dir: PathBuf },
+}
+
+#[derive(Subcommand)]
+enum Templates {
+  /// Render a single template file
+  Render {
+    #[arg(short, long)]
+    context: Option<PathBuf>,
+    file: PathBuf,
+  },
 }
 
 #[derive(Subcommand)]
@@ -43,6 +61,9 @@ pub fn run() -> Result<()> {
       Links::Status => links_status()?,
       Links::Create => links_create()?,
       _ => todo!(),
+    },
+    Commands::Templates { command } => match command {
+      Templates::Render { context, file } => templater::render_single_template(file, context)?,
     },
     Commands::Init { dotfile_dir } => init(dotfile_dir)?,
   }
